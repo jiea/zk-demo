@@ -7,12 +7,12 @@ import org.apache.zookeeper.ZooKeeper;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
-public class ZooKeeperSimple implements Watcher {
+public class ZooKeeper_Constructor_Usage implements Watcher {
 
     private static CountDownLatch connectedSemaphore = new CountDownLatch(1);
 
     public static void main(String[] args) throws IOException {
-        ZooKeeper zookeeper = new ZooKeeper("127.0.0.1:2181", 5000, new ZooKeeperSimple());
+        ZooKeeper zookeeper = new ZooKeeper("127.0.0.1:2181", 5000, new ZooKeeper_Constructor_Usage());
         System.out.println(zookeeper.getState());
 
         try {
@@ -27,7 +27,7 @@ public class ZooKeeperSimple implements Watcher {
     @Override
     public void process(WatchedEvent watchedEvent) {
         System.out.println("Receive watched :" + watchedEvent);
-        if(Event.KeeperState.SyncConnected == watchedEvent.getState()){
+        if (Event.KeeperState.SyncConnected == watchedEvent.getState()) {
             connectedSemaphore.countDown();
         }
     }

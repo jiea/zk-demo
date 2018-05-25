@@ -27,7 +27,8 @@ public class ZooKeeper_Create_API_Sync_Usage implements Watcher {
     @Override
     public void process(WatchedEvent watchedEvent) {
         if (Event.KeeperState.SyncConnected == watchedEvent.getState()) {
-            countDownLatch.countDown();
+            System.out.println(watchedEvent.getPath());
+            //countDownLatch.countDown();
         }
 
     }
